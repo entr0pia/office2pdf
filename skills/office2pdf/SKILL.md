@@ -21,15 +21,21 @@ However, **do not blindly convert massive files**. Follow this two-step pattern:
 
 ## Quick Reference
 
+> [!TIP]
+> The scripts include [PEP 723](https://peps.python.org/pep-0723/) inline metadata. `uv run` will **automatically install and resolve all required dependencies** in an isolated sandbox on first run—no manual `pip install` or `--with` flags required.
+>
+> You can run via script path from anywhere:
+> `uv run <skill_dir>/scripts/office2pdf.py <command> ...`
+
 | Task | Command |
 |---|---|
-| **Inspect any Office file** | `uv run python -m scripts.office2pdf inspect <file>` |
-| **Inspect Excel sheets & headers** | `uv run python -m scripts.office2pdf inspect <file.xlsx> --rows 5` |
-| **Inspect as JSON** | `uv run python -m scripts.office2pdf inspect <file> --json` |
-| **Convert to PDF (All formats)** | `uv run python -m scripts.office2pdf pdf <file> -o <output.pdf>` |
-| **Convert specific Excel sheet** | `uv run python -m scripts.office2pdf pdf <file.xlsx> --sheet "Sheet1"` |
-| **Convert directly to Images** | `uv run python -m scripts.office2pdf image <file> --dpi 200` |
-| **Convert specific PDF/doc pages** | `uv run python -m scripts.office2pdf image <file.pdf> --pages 1,3-5` |
+| **Inspect any Office file** | `uv run <scripts>/office2pdf.py inspect <file>` |
+| **Inspect Excel sheets & headers** | `uv run <scripts>/office2pdf.py inspect <file.xlsx> --rows 5` |
+| **Inspect as JSON** | `uv run <scripts>/office2pdf.py inspect <file> --json` |
+| **Convert to PDF (All formats)** | `uv run <scripts>/office2pdf.py pdf <file> -o <output.pdf>` |
+| **Convert specific Excel sheet** | `uv run <scripts>/office2pdf.py pdf <file.xlsx> --sheet "Sheet1"` |
+| **Convert directly to Images** | `uv run <scripts>/office2pdf.py image <file> --dpi 200` |
+| **Convert specific PDF/doc pages** | `uv run <scripts>/office2pdf.py image <file.pdf> --pages 1,3-5` |
 
 ---
 
@@ -41,21 +47,21 @@ Use `scripts.inspect_office` to instantly inspect basic structural metadata with
 - Lists all worksheets, row/column dimensions, and non-empty bounds.
 - Previews the first N rows of each worksheet (headers, IDs, column names).
 ```bash
-uv run python -m scripts.office2pdf inspect report.xlsx
+uv run <scripts>/office2pdf.py inspect report.xlsx
 ```
 
 ### Word (.docx, .doc)
 - Extracts the heading hierarchy (`Title`, `Heading 1`, `Heading 2`, `Heading 3`) into a clean Table of Contents tree.
 - Lists all tables with row count, column count, and sample header cells.
 ```bash
-uv run python -m scripts.office2pdf inspect contract.docx
+uv run <scripts>/office2pdf.py inspect contract.docx
 ```
 
 ### PowerPoint (.pptx, .ppt)
 - Lists slide count, slide titles, shapes/tables/images count per slide.
 - Extracts speaker notes and slide text outlines.
 ```bash
-uv run python -m scripts.office2pdf inspect presentation.pptx
+uv run <scripts>/office2pdf.py inspect presentation.pptx
 ```
 
 ---
@@ -76,15 +82,15 @@ The conversion script uses an intelligent multi-engine pipeline:
 
 ```bash
 # Automatic engine selection (Word, Excel, or PPT)
-uv run python -m scripts.office2pdf pdf document.docx
-uv run python -m scripts.office2pdf pdf spreadsheet.xlsx
-uv run python -m scripts.office2pdf pdf slides.pptx
+uv run <scripts>/office2pdf.py pdf document.docx
+uv run <scripts>/office2pdf.py pdf spreadsheet.xlsx
+uv run <scripts>/office2pdf.py pdf slides.pptx
 
 # Export a single sheet from Excel
-uv run python -m scripts.office2pdf pdf spreadsheet.xlsx --sheet "Q3 Financials" -o q3.pdf
+uv run <scripts>/office2pdf.py pdf spreadsheet.xlsx --sheet "Q3 Financials" -o q3.pdf
 
 # Force specific engine
-uv run python -m scripts.office2pdf pdf spreadsheet.xlsx --engine browser
+uv run <scripts>/office2pdf.py pdf spreadsheet.xlsx --engine browser
 ```
 
 ---
@@ -97,13 +103,13 @@ For multimodal models that accept images (PNG/JPEG) or when zooming into a speci
 
 ```bash
 # Convert all pages/slides to PNG at 150 DPI (default)
-uv run python -m scripts.office2pdf image presentation.pptx
+uv run <scripts>/office2pdf.py image presentation.pptx
 
 # Convert specific pages at high resolution (200 DPI)
-uv run python -m scripts.office2pdf image report.pdf --pages 1-3 --dpi 200
+uv run <scripts>/office2pdf.py image report.pdf --pages 1-3 --dpi 200
 
 # Convert directly from Office document with custom output directory
-uv run python -m scripts.office2pdf image contract.docx -o ./contract_pages --format jpg
+uv run <scripts>/office2pdf.py image contract.docx -o ./contract_pages --format jpg
 ```
 
 ### Rendering Engine

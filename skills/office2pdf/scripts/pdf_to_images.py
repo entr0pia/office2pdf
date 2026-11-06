@@ -1,3 +1,10 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "pymupdf>=1.23.0",
+# ]
+# ///
+
 """
 pdf_to_images.py
 Convert PDF documents into high-resolution images (PNG/JPG) for multimodal AI inspection.
@@ -14,6 +21,12 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import List, Optional, Set
+
+# Ensure script directory and parent directory are on sys.path
+_this_dir = Path(__file__).resolve().parent
+for _p in [str(_this_dir), str(_this_dir.parent)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 
 def parse_page_selection(pages_str: Optional[str], total_pages: int) -> Set[int]:

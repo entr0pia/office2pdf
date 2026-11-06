@@ -1,3 +1,13 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "openpyxl>=3.1.2",
+#     "python-docx>=1.1.0",
+#     "python-pptx>=0.6.23",
+#     "pywin32>=306; sys_platform == 'win32'",
+# ]
+# ///
+
 """
 convert_office.py
 High-fidelity conversion of Word, Excel, and PowerPoint documents into PDF.
@@ -18,6 +28,12 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Optional
+
+# Ensure script directory and parent directory are on sys.path
+_this_dir = Path(__file__).resolve().parent
+for _p in [str(_this_dir), str(_this_dir.parent)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 
 # =====================================================================

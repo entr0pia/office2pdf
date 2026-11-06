@@ -70,36 +70,36 @@ uv sync
 
 ## Quick Usage (CLI)
 
-All commands can be run directly via `uv`:
+Thanks to [PEP 723](https://peps.python.org/pep-0723/) inline script metadata, `uv run` **automatically resolves and caches all required dependencies** in a clean, isolated environment on first execution. You can run the script directly from any working directory without pre-activating a virtual environment:
 
 ### 1. Structural Inspection (Zero Vision Tokens)
 ```bash
 # Human-readable summary
-uv run python -m scripts.office2pdf inspect sample.xlsx
+uv run skills/office2pdf/scripts/office2pdf.py inspect sample.xlsx
 
 # JSON output for automated scripting
-uv run python -m scripts.office2pdf inspect sample.docx --json
+uv run skills/office2pdf/scripts/office2pdf.py inspect sample.docx --json
 
 # Inspect Excel with first 5 rows preview
-uv run python -m scripts.office2pdf inspect financial_report.xlsx --rows 5
+uv run skills/office2pdf/scripts/office2pdf.py inspect financial_report.xlsx --rows 5
 ```
 
 ### 2. High-Fidelity PDF Conversion
 ```bash
 # Automatic engine selection (Word, Excel, or PPT)
-uv run python -m scripts.office2pdf pdf report.docx -o report.pdf
+uv run skills/office2pdf/scripts/office2pdf.py pdf report.docx -o report.pdf
 
 # Convert a specific Excel worksheet
-uv run python -m scripts.office2pdf pdf report.xlsx --sheet "Q3 Financials" -o q3.pdf
+uv run skills/office2pdf/scripts/office2pdf.py pdf report.xlsx --sheet "Q3 Financials" -o q3.pdf
 ```
 
 ### 3. Direct Image Rendering (For Vision Models)
 ```bash
 # Convert entire presentation to 200 DPI PNG images
-uv run python -m scripts.office2pdf image presentation.pptx --dpi 200 -o ./output_images
+uv run skills/office2pdf/scripts/office2pdf.py image presentation.pptx --dpi 200 -o ./output_images
 
 # Render specific pages from a document or PDF
-uv run python -m scripts.office2pdf image document.pdf --pages 1-3 --dpi 150
+uv run skills/office2pdf/scripts/office2pdf.py image document.pdf --pages 1-3 --dpi 150
 ```
 
 ---

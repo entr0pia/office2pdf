@@ -1,3 +1,14 @@
+# /// script
+# requires-python = ">=3.10"
+# dependencies = [
+#     "openpyxl>=3.1.2",
+#     "python-docx>=1.1.0",
+#     "python-pptx>=0.6.23",
+#     "pymupdf>=1.23.0",
+#     "pywin32>=306; sys_platform == 'win32'",
+# ]
+# ///
+
 """
 office2pdf.py
 Unified Command Line Interface for Office document structural inspection,
@@ -11,12 +22,18 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+# Ensure script directory and parent directory are on sys.path for standalone execution
+_this_dir = Path(__file__).resolve().parent
+for _p in [str(_this_dir), str(_this_dir.parent)]:
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
 # Support running both as package and as standalone script
 try:
     from .inspect_office import inspect_file, format_inspection_output
     from .convert_office import convert_to_pdf
     from .pdf_to_images import pdf_to_images
-except ImportError:
+except (ImportError, ValueError):
     from inspect_office import inspect_file, format_inspection_output
     from convert_office import convert_to_pdf
     from pdf_to_images import pdf_to_images
