@@ -43,10 +43,10 @@ Install into your AI coding assistant (Antigravity, Claude Code, Cursor) using t
 
 ```bash
 # Global installation for all AI agents
-npx skills add <repository-url> -g
+npx skills add entr0pia/office2pdf -g
 
 # Or workspace-level installation
-npx skills add <repository-url>
+npx skills add entr0pia/office2pdf
 ```
 
 Alternatively, copy the `skills/office2pdf` folder directly into your global agent skills directory:
@@ -59,7 +59,7 @@ Clone the repository and install dependencies using `uv`:
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/entr0pia/office2pdf.git
 cd office2pdf
 
 # Sync dependencies in a virtual environment
